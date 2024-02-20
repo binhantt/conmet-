@@ -14,10 +14,13 @@ class Comment extends Controller
         $data[] = [];
         $data['template'] = 'comment/index';
         $data['comment'] = CommentModel::all()->toArray();
-        $data['nguoidung'] = DB::table('comments')
-            ->join('users', 'comments.user_id', '=', 'users.id')
-            ->select('comments.id', 'users.name')
-            ->get();
+        $data['nguoidung'] = DB::select("SELECT `comment`.`id`, `users`.`name`, `comment`.`content`, `comment`.`reply_user_id` FROM `comment` INNER JOIN `users` ON `comment`.`user_id` = `users`.`id`");
+        $data['nguoidung'] = collect($data['nguoidung'])->toArray();
+        //dd($data['nguoidung'] );
         return view('comment', $data);
+    }
+    public function post(){
+        CommentModel::create($_POST);
+        return redirect('/comment');
     }
 }
