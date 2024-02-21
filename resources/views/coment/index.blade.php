@@ -31,7 +31,7 @@
                 <nav class="level is-mobile">
                     <div class="level-left">
                         <a class="level-item">
-                            <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                        <button class="reply icon is-small"><i class="fas fa-reply"></i></button>
                         </a>
                         <a class="level-item">
                             <span class="icon is-small"><i class="fas fa-retweet"></i></span>
@@ -72,7 +72,7 @@
             </div>
         </article>
         @endif
-        <div class="field mt-2 ml-5">
+        <div class="phanhoi field mt-2 ml-5">
             <div class="control">
                 <textarea class="textarea is-small is-primary" placeholder="phản hồi"></textarea>
 
