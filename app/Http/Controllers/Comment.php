@@ -16,11 +16,16 @@ class Comment extends Controller
         $data['comment'] = CommentModel::all()->toArray();
         $data['nguoidung'] = DB::select("SELECT `comment`.`id`, `users`.`name`, `comment`.`content`, `comment`.`reply_user_id` FROM `comment` INNER JOIN `users` ON `comment`.`user_id` = `users`.`id` WHERE `comment`.`reply_user_id` = 0");
         $data['nguoidung'] = collect($data['nguoidung'])->toArray();
-        //dd($data['nguoidung'] );
+        $data['reply'] = DB::select("SELECT `comment`.`id`, `users`.`name`, `comment`.`content`, `comment`.`reply_user_id` FROM `comment` INNER JOIN `users` ON `comment`.`user_id` = `users`.`id` WHERE `comment`.`reply_user_id` >0 ");
         return view('comment', $data);
     }
     public function post(){
         CommentModel::create($_POST);
         return redirect('/comment');
+    }
+    public function delete(Request $request, $id)
+    {
+        CommentModel::find($id)->delete();
+        return route('index');
     }
 }

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('comment')->group(function(){
-    Route::get('/','App\Http\Controllers\Comment@index');
+    Route::get('/','App\Http\Controllers\Comment@index')->name('index');
     Route::post('/post','App\Http\Controllers\Comment@post')->name('post');
+    Route::delete('/delete-{id}','App\Http\Controllers\Comment@delete')->name('delete');
 });
